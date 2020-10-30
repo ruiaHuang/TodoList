@@ -9,15 +9,22 @@ class TodoList extends Component {
     // 当组件的state或者props发生改变的时候，render函数就会重新执行
     this.state = {
       inputValue: '',
-      list: [],
+      list: []
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
     this.handleItemDelete = this.handleItemDelete.bind(this)
+    console.log(1)
+  }
+
+  //  在组件即将被挂在到页面的时刻自动执行
+  //  原名componentWillMount
+  UNSAFE_componentWillMount() {
+    console.log('UNSAFE_componentWillMount')
   }
 
   render() {
-    // console.log('TodoList render')
+    console.log('TodoList render')
     return (
       <Fragment>
         <div>
@@ -29,6 +36,30 @@ class TodoList extends Component {
         <Test content={this.state.inputValue} />
       </Fragment>
     )
+  }
+
+  // 组件被挂在到页面之后，自动被执行
+  componentDidMount() {
+    console.log('componentDidMount')
+  }
+
+  // 组件被更新之前， 它会自动被执行
+  // 原名componentWillUpdate
+  UNSAFE_componentWillUpdate() {
+    console.log('UNSAFE_componentWillUpdate')
+    return true
+  }
+
+  // 组件被更新之前，它会自动执行，但是他在shouldComponentUpdate之后被执行
+  // 如果 返回true 它才执行
+  // 如果 返回false 这个函数就不会执行
+  componentWillUpdate() {
+    console.log('componentWillUpdate')
+  }
+
+  // 组件更新完成之后，它会被执行
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
   }
 
   getTodoItem() {
