@@ -9,7 +9,7 @@ class TodoList extends Component {
     // 当组件的state或者props发生改变的时候，render函数就会重新执行
     this.state = {
       inputValue: '',
-      list: [],
+      list: []
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)

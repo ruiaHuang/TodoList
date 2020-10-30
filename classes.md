@@ -58,3 +58,60 @@
 ### 优点
 1. 性能提升了。
 2. 它使得跨端应用得以实现。 React Native
+
+# 生命周期函数 指在某一个时刻组件会自动调用执行的函数
+
+![]('./src/images/React生命周期.png')
+
+## React 生命周期函数
+
+```javascript
+//  在组件即将被挂在到页面的时刻自动执行
+//  原名componentWillMount
+UNSAFE_componentWillMount() {
+  console.log('UNSAFE_componentWillMount')
+}
+
+// 当组件的state或者props发生改变的时候，render函数就会重新执行
+render
+
+//  组件被挂在到页面之后，自动被执行
+componentDidMount() {
+  console.log('componentDidMount')
+}
+
+// 组件被更新之前， 它会自动被执行
+// 原名componentWillUpdate
+UNSAFE_componentWillUpdate() {
+  console.log('UNSAFE_componentWillUpdate')
+  return true
+}
+
+// 组件被更新之前，它会自动执行，但是他在shouldComponentUpdate之后被执行
+// 如果 返回true 它才执行
+// 如果 返回false 这个函数就不会执行
+componentWillUpdate() {
+  console.log('componentWillUpdate')
+}
+
+// 组件更新完成之后，它会被执行
+componentDidUpdate() {
+  console.log('componentDidUpdate')
+}
+
+// 当一个组件从父组件接受参数
+// (只要父组件的render函数被重新执行了，子组件的这个生命周期函数就会被执行)
+// 如果这个组件第一次存在于父组件中，不会执行
+// 如果这个组件之前已经存在于父组件中，才会执行
+UNSAFE_componentWillReceiveProps() {
+  console.log('child UNSAFE_componentWillReceiveProps')
+}
+
+// 组件卸载之前执行的函数
+componentWillUnmount() {
+  console.log('child componentWillUnmount')
+}
+
+
+```
+
