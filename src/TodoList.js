@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import TodoItem from './TodoItem'
-import Test from './Test'
 import './style.css'
 
 class TodoList extends Component {
@@ -16,6 +15,7 @@ class TodoList extends Component {
     this.handleItemDelete = this.handleItemDelete.bind(this)
   }
 
+  // 当父组件的render函数被运行时，它的子组件的render都将被重新运行
   render() {
     // console.log('TodoList render')
     return (
@@ -26,7 +26,6 @@ class TodoList extends Component {
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
         <ul>{this.getTodoItem()}</ul>
-        <Test content={this.state.inputValue} />
       </Fragment>
     )
   }
