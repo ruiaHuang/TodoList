@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
-// import axios from 'axios'
+import { CSSTransition } from 'react-transition-group'
+
 import './style.css'
 
 class App extends Component {
@@ -14,24 +15,27 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className={this.state.show ? 'show' : 'hide'}>Hello</div>
+        <CSSTransition
+          in={this.state.show}
+          timeout={1000}
+          classNames='fade'
+          onEntered={(el) => {
+            el.style.color = 'blue'
+          }}
+          appear={true}>
+          <div>Hello</div>
+        </CSSTransition>
         <button onClick={this.handleToggle}>toggle</button>
       </Fragment>
     )
   }
 
-  componentDidMount() {
-    // axios.get('/get').then((data) => {
-    //   console.log('data', data)
-    // })
-  }
+  componentDidMount() {}
 
   handleToggle() {
-    this.setState((prevState) => {
-      return {
-        show: !prevState.show
-      }
-    })
+    this.setState((prevState) => ({
+      show: !prevState.show
+    }))
   }
 }
 
