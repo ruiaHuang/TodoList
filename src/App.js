@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import './style.css'
 
@@ -7,34 +7,42 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: true
+      show: true,
+      list: []
     }
-    this.handleToggle = this.handleToggle.bind(this)
+    this.handleAddItem = this.handleAddItem.bind(this)
   }
 
   render() {
     return (
       <Fragment>
-        <CSSTransition
-          in={this.state.show}
-          timeout={1000}
-          classNames='fade'
-          onEntered={(el) => {
-            el.style.color = 'blue'
-          }}
-          appear={true}>
-          <div>Hello</div>
-        </CSSTransition>
-        <button onClick={this.handleToggle}>toggle</button>
+        <TransitionGroup>
+          {this.state.list.map((item, index) => {
+            return (
+              // 如果key 为item 默认就只会渲染一个 因为item是固定字符串
+              <CSSTransition
+                key={index}
+                timeout={1000}
+                classNames='fade'
+                onEntered={(el) => {
+                  el.style.color = 'blue'
+                }}
+                appear={true}>
+                <div>{item}</div>
+              </CSSTransition>
+            )
+          })}
+        </TransitionGroup>
+        <button onClick={this.handleAddItem}>ADD</button>
       </Fragment>
     )
   }
 
   componentDidMount() {}
 
-  handleToggle() {
+  handleAddItem() {
     this.setState((prevState) => ({
-      show: !prevState.show
+      list: [...prevState.list, 'item']
     }))
   }
 }
