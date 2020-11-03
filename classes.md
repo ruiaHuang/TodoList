@@ -115,3 +115,17 @@ componentWillUnmount() {
 
 ```
 
+## redux
+1. store 是唯一的
+2. 只有store 能够改变自己的内容
+3. Reducer 必须是纯函数
+
+### 纯函数指的是，给定固定的输入，就一定会有固定的输出，而且不会有任何副作用
+
+```
+ Redux API
+createStore
+store.dispatch
+store.getState
+store.subscribe
+```
