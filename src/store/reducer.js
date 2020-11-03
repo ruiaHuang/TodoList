@@ -1,6 +1,6 @@
 const defaultState = {
-  inputValue: '666',
-  list: [1, 2, 3]
+  inputValue: '',
+  list: []
 }
 
 const reducer = (state = defaultState, action) => {
@@ -12,6 +12,9 @@ const reducer = (state = defaultState, action) => {
   } else if (type === 'ADD_TODO_ITEM') {
     newState.list.push(newState.inputValue)
     newState.inputValue = ''
+    return newState
+  } else if (type === 'DELETE_TODO_ITEM') {
+    newState.list.splice(action.index, 1)
     return newState
   }
   return state
