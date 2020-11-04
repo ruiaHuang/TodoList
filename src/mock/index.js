@@ -28,7 +28,7 @@ Mock.setup({
   timeout: '200-600'
 })
 
-Mock.mock('/post', {
+Mock.mock('/getRadomObj', {
   randomEmail,
   randomBoolean,
   randomBase64Img,
@@ -38,7 +38,20 @@ Mock.mock('/post', {
   image
 })
 
-Mock.mock('/get', {
+Mock.mock(
+  '/list',
+  // {
+  //   'list|1-10': [
+  //     {
+  //       'id|+1': 1,
+  //       'count|1-100': 1
+  //     }
+  //   ]
+  // }
+  [1, 2, 3]
+)
+
+Mock.mock('/getUser', {
   'firstName|2': 'rui', //rui 3 次，
   'lastName|2-5': 'huang', //huang 2-5 次。
   'big|+1': 0, //属性值自动加 1，初始值为 0

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+// import React from 'react'
 import { Input, Button, List } from 'antd'
 
 // 当一个组件只有一个render函数时，可以替换成 下面的 无状态组件
