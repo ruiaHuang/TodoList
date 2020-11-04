@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Input, Button, List } from 'antd'
 import store from './store'
+import TodoListUI from './TodoListUI'
 import { getInputChangeAction, getAddItemAction, getDeleteItemAction } from './store/actionCreators'
 
 class TodoList extends Component {
@@ -11,24 +11,14 @@ class TodoList extends Component {
 
   render() {
     return (
-      <div style={{ margin: '10px' }}>
-        <Input
-          allowClear
-          value={this.state.inputValue}
-          placeholder='fuck you'
-          style={{ width: '300px', marginRight: '10px', marginBottom: '10px' }}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}></Input>
-        <Button type='primary' onClick={this.handleBtnClick}>
-          提交
-        </Button>
-        <List
-          style={{ width: '300px' }}
-          bordered
-          dataSource={this.state.list}
-          renderItem={(item, index) => <List.Item onClick={() => this.handleItemDelete(index)}> {item}</List.Item>}
-        />
-      </div>
+      <TodoListUI
+        inputValue={this.state.inputValue}
+        handleChange={this.handleChange}
+        handleKeyDown={this.handleKeyDown}
+        handleBtnClick={this.handleBtnClick}
+        list={this.state.list}
+        handleItemDelete={this.handleItemDelete}
+      />
     )
   }
 
@@ -53,7 +43,7 @@ class TodoList extends Component {
     store.dispatch(action)
   }
 
-  handleItemDelete(index) {
+  handleItemDelete = (index) => {
     const action = getDeleteItemAction(index)
     store.dispatch(action)
   }
