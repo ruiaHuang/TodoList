@@ -39,8 +39,10 @@ class TodoList extends Component {
   }
 
   handleBtnClick = () => {
-    const action = getAddItemAction()
-    store.dispatch(action)
+    if (this.state.inputValue) {
+      const action = getAddItemAction()
+      store.dispatch(action)
+    }
   }
 
   handleItemDelete = (index) => {
