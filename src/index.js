@@ -5,8 +5,8 @@ import './mock'
 import 'antd/dist/antd.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <TodoList />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <TodoList />,
+  // </React.StrictMode>
   document.getElementById('root')
 )
