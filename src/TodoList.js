@@ -1,60 +1,39 @@
-import React, { Component } from 'react'
-import store from './store'
-import TodoListUI from './TodoListUI'
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitList } from './store/actionCreators'
+import { Component } from 'react'
+import { connect } from 'react-redux'
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = store.getState()
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = store.getState()
+  // }
 
   render() {
     return (
-      <TodoListUI
-        inputValue={this.state.inputValue}
-        handleChange={this.handleChange}
-        handleKeyDown={this.handleKeyDown}
-        handleBtnClick={this.handleBtnClick}
-        list={this.state.list}
-        handleItemDelete={this.handleItemDelete}
-      />
+      <div>
+        <div>
+          <input value={this.props.inputValue} onChange={this.handleInputChange.bind(this)} />
+          <button>提交</button>
+        </div>
+        <ul>
+          <li>Ray</li>
+        </ul>
+      </div>
     )
   }
-
-  componentDidMount() {
-    store.subscribe(this.handleStoreChange)
-    const action = getInitList()
-    store.dispatch(action)
-  }
-
-  handleChange = (e) => {
+  handleInputChange(e) {
     let value = e.target.value
-    const action = getInputChangeAction(value)
-    store.dispatch(action)
-  }
-
-  handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      this.handleBtnClick()
-    }
-  }
-
-  handleBtnClick = () => {
-    if (this.state.inputValue) {
-      const action = getAddItemAction()
-      store.dispatch(action)
-    }
-  }
-
-  handleItemDelete = (index) => {
-    const action = getDeleteItemAction(index)
-    store.dispatch(action)
-  }
-
-  handleStoreChange = () => {
-    this.setState(() => store.getState())
+    console.log('TodoList -> handleInputChange -> value', value)
   }
 }
 
-export default TodoList
+const mapStateToProps = (state) => {
+  return {
+    inputValue: state.inputValue
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
