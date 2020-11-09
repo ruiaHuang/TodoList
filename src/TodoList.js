@@ -1,39 +1,64 @@
-import { Component } from 'react'
 import { connect } from 'react-redux'
 
-class TodoList extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = store.getState()
-  // }
+//  UI组件
+const TodoList = (props) => {
+  const { inputValue, handleInputChange, handleClick, list, handleDelete } = props
 
-  render() {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <input value={this.props.inputValue} onChange={this.handleInputChange.bind(this)} />
-          <button>提交</button>
-        </div>
-        <ul>
-          <li>Ray</li>
-        </ul>
+        <input value={inputValue} onChange={handleInputChange} />
+        <button onClick={handleClick}>提交</button>
       </div>
-    )
-  }
-  handleInputChange(e) {
-    let value = e.target.value
-    console.log('TodoList -> handleInputChange -> value', value)
-  }
+      <ul>
+        {list.map((item, index) => {
+          return (
+            <li key={item} onClick={() => handleDelete(index)}>
+              {item}
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {
   return {
-    inputValue: state.inputValue
+    inputValue: state.inputValue,
+    list: state.list
   }
 }
 
+// store.dispatch props
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    handleInputChange(e) {
+      let value = e.target.value
+      const action = {
+        type: 'change_input_value',
+        value
+      }
+      dispatch(action)
+    },
+
+    handleClick() {
+      const action = {
+        type: 'add_item'
+      }
+      dispatch(action)
+    },
+
+    handleKeyUp() {},
+
+    handleDelete(index) {
+      const action = {
+        type: 'delete_item',
+        index
+      }
+      dispatch(action)
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
